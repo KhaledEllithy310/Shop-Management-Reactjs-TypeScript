@@ -31,7 +31,7 @@ const AppMap = () => {
         center={position}
         mapContainerClassName='map-container'
       >
-        ;<Marker position={selected || { lat: 0, lng: 0 }} />
+        {selected && <Marker position={selected} />}
       </GoogleMap>
     </>
   )

@@ -1,9 +1,8 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Modal from '@mui/material/Modal'
-import AppButton from '../Ui/Button'
-import Input from '../Ui/Input'
 import AppMap from './../Ui/AppMap'
+import { ReactNode } from 'react'
 
 const style = {
   position: 'absolute' as const,
@@ -22,8 +21,9 @@ interface IProps {
   open: boolean
   handleOpen: () => void
   setOpen: (val: boolean) => void
+  children?: ReactNode
 }
-export default function AppModal ({ setOpen, open }: IProps) {
+export default function AppModal ({ setOpen, open, children }: IProps) {
   const handleClose = () => setOpen(false)
 
   return (
@@ -47,35 +47,17 @@ export default function AppModal ({ setOpen, open }: IProps) {
 
           <Box
             component={'section'}
-            sx={{ display: 'flex', gap: 1, justifyContent: 'center', mt: 3 }}
+            sx={{
+              display: 'flex',
+              gap: 1,
+              justifyContent: 'between',
+              mt: 3,
+              direction: 'row'
+            }}
           >
-            <Input title='Shop Name' type='text' />
-            <Input title='Phone Number' type='number' />
-            <Input title='Shop Code' type='text' />
+            {children}
           </Box>
           {/* ens inputs */}
-
-          {/* start actions */}
-          <Box
-            component={'section'}
-            sx={{ display: 'flex', gap: 1, justifyContent: 'center', mt: 3 }}
-          >
-            <AppButton
-              onClick={handleClose}
-              variant='outlined'
-              title='Cancel'
-              color='error'
-              fullWidth
-              sx={{ textTransform: 'capitalize' }}
-            />
-            <AppButton
-              variant='contained'
-              sx={{ textTransform: 'capitalize' }}
-              title='Continue'
-              fullWidth
-            />
-          </Box>
-          {/* end actions */}
         </Box>
       </Modal>
     </div>
