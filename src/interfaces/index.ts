@@ -13,5 +13,10 @@ export interface IFormInputs {
 export interface IShop {
   shopName: string;
   shopCode: string;
+  location: {
+    lat: number;
+    lng: number;
+    address: string;
+  };
   phoneNumber: string;
 }

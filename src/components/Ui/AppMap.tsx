@@ -1,20 +1,19 @@
-import { useState } from 'react'
 import { API_KEY } from '../../constants'
 import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api'
-import PlacesAutocomplete from './PlacesAutoComplete'
+import { useRecoilState } from 'recoil'
+import { locationState } from '../../Atoms/Location'
 
 const AppMap = () => {
-  const [selected, setSelected] = useState<{ lat: number; lng: number } | null>(
-    null
-  )
-  console.log('selected', selected)
+  //----------STATES----------//
+  const [location] = useRecoilState(locationState)
+
+  console.log('selected', location)
 
   // Places
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: API_KEY,
     libraries: ['places']
   })
-  console.log(isLoaded)
 
   if (!isLoaded) return <div>...Loading</div>
 
@@ -22,17 +21,15 @@ const AppMap = () => {
 
   return (
     <>
-      <section>
-        <PlacesAutocomplete setSelected={setSelected} />
+      <section className='map-container'>
+        <GoogleMap
+          zoom={5}
+          center={position}
+          mapContainerClassName='map-container'
+        >
+          {location.address && <Marker position={location} />}
+        </GoogleMap>
       </section>
-
-      <GoogleMap
-        zoom={5}
-        center={position}
-        mapContainerClassName='map-container'
-      >
-        {selected && <Marker position={selected} />}
-      </GoogleMap>
     </>
   )
 }

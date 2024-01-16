@@ -1,26 +1,50 @@
 import { useForm, SubmitHandler } from 'react-hook-form'
 import Input from '../Ui/Input'
 import { formFields } from '../../Data'
-import { IFormFields, IShop } from '../../interfaces'
+import { IFormFields } from '../../interfaces'
 import AppButton from '../Ui/Button'
 import Box from '@mui/material/Box'
-
+import { useRecoilState } from 'recoil'
+import { shopState } from '../../Atoms/Shops'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import PlacesAutocomplete from '../Ui/PlacesAutoComplete'
+import { locationState } from '../../Atoms/Location'
+import { notify } from '../../helpers'
 interface IProps {
   handleClose: () => void
-  setShops: (val: IShop[]) => void
-  shops: IShop[]
 }
-const AddForm = ({ handleClose, setShops, shops }: IProps) => {
-  // Handlers
+const AddForm = ({ handleClose }: IProps) => {
+  //----------STATES----------//
+
+  const [shops, setShops] = useRecoilState(shopState)
+  const [location, setLocation] = useRecoilState(locationState)
+
+  //----------HANDLERS----------//
+
+  const contactSchema = z.object({
+    shopName: z.string().min(3, 'shop name is required at least 3 characters'),
+    shopCode: z.string().min(3, 'shop code is required'),
+    phoneNumber: z
+      .string()
+      .regex(/^(0)(10|11|15)\d{8}$/, 'Invalid phone number format')
+  })
+
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<IFormFields>()
+  } = useForm<IFormFields>({
+    mode: 'onChange',
+    resolver: zodResolver(contactSchema)
+  })
 
-  const onSubmit: SubmitHandler<IFormFields> = data => {
-    setShops([...shops, { ...data }])
-    handleClose()
+  const onSubmit: SubmitHandler<IFormFields> = shop => {
+    if (location.address) {
+      setShops([...shops, { ...shop, location: { ...location } }])
+      handleClose()
+    } else notify('error', 'please select your location')
+    setLocation({ lat: 0, lng: 0, address: '' })
   }
 
   //----------RENDERS----------//
@@ -44,6 +68,9 @@ const AddForm = ({ handleClose, setShops, shops }: IProps) => {
         component={'section'}
         sx={{ display: 'flex', gap: 1, justifyContent: 'center', mt: 3 }}
       >
+        <section className='PlacesAutocomplete'>
+          <PlacesAutocomplete />
+        </section>
         <AppButton
           onClick={handleClose}
           variant='outlined'

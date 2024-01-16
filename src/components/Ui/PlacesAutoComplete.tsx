@@ -10,11 +10,12 @@ import usePlacesAutocomplete, {
   getLatLng
 } from 'use-places-autocomplete'
 import '@reach/combobox/styles.css'
+import { locationState } from '../../Atoms/Location'
+import { useRecoilState } from 'recoil'
 
-interface IProps {
-  setSelected: (val: { lat: number; lng: number } | null) => void
-}
-const PlacesAutocomplete = ({ setSelected }: IProps) => {
+const PlacesAutocomplete = () => {
+  const [, setLocation] = useRecoilState(locationState)
+
   const {
     ready,
     value,
@@ -28,12 +29,9 @@ const PlacesAutocomplete = ({ setSelected }: IProps) => {
   const handleSelect = async (address: string) => {
     setValue(address, false)
     clearSuggestions()
-
     const results = await getGeocode({ address })
     const { lat, lng } = await getLatLng(results[0])
-    console.log(lat, lng)
-
-    setSelected({ lat, lng })
+    setLocation({ lat, lng, address })
   }
 
   return (

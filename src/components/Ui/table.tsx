@@ -1,4 +1,3 @@
-import * as React from 'react'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -6,15 +5,17 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
-import { IShop } from '../../interfaces'
 import ActionMenu from './Menu'
+import { useRecoilState } from 'recoil'
+import { shopState } from '../../Atoms/Shops'
 
-const headTitle = ['Shop Name', 'Shop Code', 'Phone Number', 'Action']
-interface IProps {
-  shops: IShop[]
-  setShops: (val: (prev: IShop[]) => IShop[]) => void
-}
-export default function AppTable ({ shops, setShops }: IProps) {
+const headTitle = ['Shop Name', 'Shop Code', 'location', 'Phone Number', '']
+
+export default function AppTable () {
+  const [shops] = useRecoilState(shopState)
+
+  console.log(shops)
+
   return (
     <TableContainer component={Paper}>
       <Table
@@ -51,8 +52,13 @@ export default function AppTable ({ shops, setShops }: IProps) {
                 {shop.shopName}
               </TableCell>
               <TableCell align='center'>{shop.shopCode}</TableCell>
+              <TableCell align='center'>{shop.location.address}</TableCell>
               <TableCell align='center'>{shop.phoneNumber}</TableCell>
-              <ActionMenu shop={shop} setShops={setShops} />
+              {/* Start Actions menu */}
+              <TableCell align='center'>
+                <ActionMenu shop={shop} />
+              </TableCell>
+              {/* End Actions menu */}
             </TableRow>
           ))}
         </TableBody>

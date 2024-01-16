@@ -13,3 +13,31 @@
   display: flex;
   gap: 1rem;
 }
+
+.PlacesAutocomplete {
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.combobox-input {
+  height: 1rem;
+  width: 11rem;
+  border-radius: 5px;
+  outline: none;
+  padding: 5px;
+}
+
+.combobox-input:focus {
+  border: 2px solid #1976d2;
+}
+
+[data-reach-combobox-popover] {
+  border-radius: 5px;
+}
+
+[data-reach-combobox-option]:not(:last-child) {
+  padding: 10px;
+  border-bottom: 1px solid gray;
+}

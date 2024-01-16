@@ -2,13 +2,19 @@ import { MoreVert } from '@mui/icons-material'
 import { Button, Menu, MenuItem } from '@mui/material'
 import React from 'react'
 import { IShop } from '../../interfaces'
+import { useRecoilState } from 'recoil'
+import { shopState } from '../../Atoms/Shops'
 interface IProps {
   shop: IShop
-  setShops: (val: (prev: IShop[]) => IShop[]) => void
 }
-export default function ActionMenu ({ shop, setShops }: IProps) {
+export default function ActionMenu ({ shop }: IProps) {
+  //========STATES==========//
+  const [, setShops] = useRecoilState(shopState)
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
+
+  //========HANDLERS==========//
+
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget)
   }
@@ -23,7 +29,6 @@ export default function ActionMenu ({ shop, setShops }: IProps) {
       )
     }
 
-    //   setShops
     handleClose()
   }
   return (
