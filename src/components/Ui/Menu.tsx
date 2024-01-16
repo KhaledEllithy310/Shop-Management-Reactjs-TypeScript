@@ -4,11 +4,14 @@ import React from 'react'
 import { IShop } from '../../interfaces'
 import { useRecoilState } from 'recoil'
 import { shopState } from '../../Atoms/Shops'
+import { currentShopState } from '../../Atoms/CurrentShop'
 interface IProps {
   shop: IShop
+  openModal: () => void
 }
-export default function ActionMenu ({ shop }: IProps) {
+export default function ActionMenu ({ shop, openModal }: IProps) {
   //========STATES==========//
+  const [, setCurrentShop] = useRecoilState(currentShopState)
   const [, setShops] = useRecoilState(shopState)
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
@@ -31,6 +34,12 @@ export default function ActionMenu ({ shop }: IProps) {
 
     handleClose()
   }
+
+  const handleEditShop = () => {
+    setCurrentShop(shop)
+    openModal()
+    handleClose()
+  }
   return (
     <div>
       <Button
@@ -51,7 +60,7 @@ export default function ActionMenu ({ shop }: IProps) {
           'aria-labelledby': 'basic-button'
         }}
       >
-        <MenuItem onClick={handleClose}>Edit</MenuItem>
+        <MenuItem onClick={handleEditShop}>Edit</MenuItem>
         <MenuItem onClick={handleDeleteShop}>Remove</MenuItem>
       </Menu>
     </div>

@@ -12,10 +12,13 @@ import usePlacesAutocomplete, {
 import '@reach/combobox/styles.css'
 import { locationState } from '../../Atoms/Location'
 import { useRecoilState } from 'recoil'
+import { IShop } from '../../interfaces'
+import { useEffect } from 'react'
 
-const PlacesAutocomplete = () => {
-  const [, setLocation] = useRecoilState(locationState)
-
+interface IProps {
+  currentShop: IShop
+}
+const PlacesAutocomplete = ({ currentShop }: IProps) => {
   const {
     ready,
     value,
@@ -23,6 +26,13 @@ const PlacesAutocomplete = () => {
     suggestions: { status, data },
     clearSuggestions
   } = usePlacesAutocomplete()
+
+  const [, setLocation] = useRecoilState(locationState)
+  useEffect(() => {
+    if (currentShop?.location?.address) {
+      handleSelect(currentShop.location.address)
+    }
+  }, [])
 
   console.log(data, status, ready)
 

@@ -10,8 +10,10 @@ import { useRecoilState } from 'recoil'
 import { shopState } from '../../Atoms/Shops'
 
 const headTitle = ['Shop Name', 'Shop Code', 'location', 'Phone Number', '']
-
-export default function AppTable () {
+interface IProps {
+  openModal: () => void
+}
+export default function AppTable ({ openModal }: IProps) {
   const [shops] = useRecoilState(shopState)
 
   console.log(shops)
@@ -56,7 +58,7 @@ export default function AppTable () {
               <TableCell align='center'>{shop.phoneNumber}</TableCell>
               {/* Start Actions menu */}
               <TableCell align='center'>
-                <ActionMenu shop={shop} />
+                <ActionMenu shop={shop} openModal={openModal} />
               </TableCell>
               {/* End Actions menu */}
             </TableRow>

@@ -40,7 +40,7 @@ export default function Home () {
         <AddForm handleClose={() => setOpen(false)} />
       </AppModal>
 
-      <AppTable />
+      <AppTable openModal={handleOpen} />
     </>
   )
 }

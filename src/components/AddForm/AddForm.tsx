@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from 'react-hook-form'
 import Input from '../Ui/Input'
 import { formFields } from '../../Data'
-import { IFormFields } from '../../interfaces'
+import { IFormFields, IShop } from '../../interfaces'
 import AppButton from '../Ui/Button'
 import Box from '@mui/material/Box'
 import { useRecoilState } from 'recoil'
@@ -11,6 +11,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import PlacesAutocomplete from '../Ui/PlacesAutoComplete'
 import { locationState } from '../../Atoms/Location'
 import { notify } from '../../helpers'
+import { currentShopState } from '../../Atoms/CurrentShop'
+import { useEffect } from 'react'
 interface IProps {
   handleClose: () => void
 }
@@ -18,6 +20,7 @@ const AddForm = ({ handleClose }: IProps) => {
   //----------STATES----------//
 
   const [shops, setShops] = useRecoilState(shopState)
+  const [currentShop, setCurrentShop] = useRecoilState(currentShopState)
   const [location, setLocation] = useRecoilState(locationState)
 
   //----------HANDLERS----------//
@@ -33,6 +36,7 @@ const AddForm = ({ handleClose }: IProps) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors }
   } = useForm<IFormFields>({
     mode: 'onChange',
@@ -40,13 +44,36 @@ const AddForm = ({ handleClose }: IProps) => {
   })
 
   const onSubmit: SubmitHandler<IFormFields> = shop => {
-    if (location.address) {
-      setShops([...shops, { ...shop, location: { ...location } }])
+    //handle edit shop
+    if (currentShop && location.address) {
+      setShops(
+        shops.map(item =>
+          item.shopName === currentShop.shopName ? { ...shop, location } : item
+        )
+      )
+      notify('success', 'shop updated successfully')
+      setCurrentShop({} as IShop)
       handleClose()
+      //handle add shop
+    } else if (location.address) {
+      setShops([...shops, { ...shop, location }])
+      handleClose()
+      notify('success', 'shop added successfully')
     } else notify('error', 'please select your location')
     setLocation({ lat: 0, lng: 0, address: '' })
   }
 
+  useEffect(() => {
+    if (currentShop) {
+      reset(currentShop)
+    }
+  }, [currentShop, reset])
+
+  const handleCloseForm = () => {
+    handleClose()
+    setCurrentShop({} as IShop)
+    setLocation({ lat: 0, lng: 0, address: '' })
+  }
   //----------RENDERS----------//
 
   const renderInputForm = formFields.map(field => (
@@ -69,10 +96,10 @@ const AddForm = ({ handleClose }: IProps) => {
         sx={{ display: 'flex', gap: 1, justifyContent: 'center', mt: 3 }}
       >
         <section className='PlacesAutocomplete'>
-          <PlacesAutocomplete />
+          <PlacesAutocomplete currentShop={currentShop} />
         </section>
         <AppButton
-          onClick={handleClose}
+          onClick={handleCloseForm}
           variant='outlined'
           title='Cancel'
           color='error'
