@@ -5,7 +5,7 @@ import { IFormFields, IShop } from '../../interfaces'
 import AppButton from '../Ui/Button'
 import Box from '@mui/material/Box'
 import { useRecoilState } from 'recoil'
-import { shopState } from '../../Atoms/Shops'
+// import { shopState } from '../../Atoms/Shops'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import PlacesAutocomplete from '../Ui/PlacesAutoComplete'
@@ -13,17 +13,22 @@ import { locationState } from '../../Atoms/Location'
 import { notify } from '../../helpers'
 import { currentShopState } from '../../Atoms/CurrentShop'
 import { useEffect } from 'react'
+import { useAddShop } from '../../hooks/useAddShop'
+import { useEditShop } from '../../hooks/useEditShop'
 interface IProps {
   handleClose: () => void
 }
 const AddForm = ({ handleClose }: IProps) => {
   //----------STATES----------//
-
-  const [shops, setShops] = useRecoilState(shopState)
+  // const [shops, setShops] = useRecoilState(shopState)
+  //current shop for editing
   const [currentShop, setCurrentShop] = useRecoilState(currentShopState)
   const [location, setLocation] = useRecoilState(locationState)
 
   //----------HANDLERS----------//
+
+  const addShop = useAddShop()
+  const editShop = useEditShop()
 
   const contactSchema = z.object({
     shopName: z.string().min(3, 'shop name is required at least 3 characters'),
@@ -44,23 +49,22 @@ const AddForm = ({ handleClose }: IProps) => {
   })
 
   const onSubmit: SubmitHandler<IFormFields> = shop => {
+    console.log('out')
     //check if user has selected location
     if (location.address) {
       //handle edit shop
       if (Object.keys(currentShop).length > 0) {
-        setShops(
-          shops.map(item =>
-            item.shopName === currentShop.shopName
-              ? { ...shop, location }
-              : item
-          )
-        )
+        console.log('in edit')
+        editShop({ ...shop, location, id: currentShop.id })
         notify('success', 'shop updated successfully')
         setCurrentShop({} as IShop)
         handleClose()
       } else {
         //handle add shop
-        setShops([...shops, { ...shop, location }])
+        console.log('in add')
+        //send request to firebase and update recoil
+        addShop({ ...shop, location })
+        // setShops([...shops, { ...shop, location }])
         handleClose()
         notify('success', 'shop added successfully')
       }

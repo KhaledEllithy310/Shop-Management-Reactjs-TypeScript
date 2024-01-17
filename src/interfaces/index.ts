@@ -11,6 +11,7 @@ export interface IFormInputs {
 }
 
 export interface IShop {
+  id: string;
   shopName: string;
   shopCode: string;
   location: {

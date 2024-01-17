@@ -3,8 +3,8 @@ import { Button, Menu, MenuItem } from '@mui/material'
 import React from 'react'
 import { IShop } from '../../interfaces'
 import { useRecoilState } from 'recoil'
-import { shopState } from '../../Atoms/Shops'
 import { currentShopState } from '../../Atoms/CurrentShop'
+import { useDeleteShop } from '../../hooks/useDeleteShop'
 interface IProps {
   shop: IShop
   openModal: () => void
@@ -12,10 +12,9 @@ interface IProps {
 export default function ActionMenu ({ shop, openModal }: IProps) {
   //========STATES==========//
   const [, setCurrentShop] = useRecoilState(currentShopState)
-  const [, setShops] = useRecoilState(shopState)
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
-
+  const deleteShop = useDeleteShop()
   //========HANDLERS==========//
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -27,11 +26,8 @@ export default function ActionMenu ({ shop, openModal }: IProps) {
 
   const handleDeleteShop = () => {
     if (window.confirm('Are you sure you want to delete this shop?')) {
-      setShops((prev: IShop[]) =>
-        prev.filter(item => item.shopName !== shop.shopName)
-      )
+      deleteShop(shop)
     }
-
     handleClose()
   }
 

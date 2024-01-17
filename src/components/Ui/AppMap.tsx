@@ -10,8 +10,6 @@ const AppMap = ({ children }: IProps) => {
   //----------STATES----------//
   const [location] = useRecoilState(locationState)
 
-  console.log('selected', location)
-
   // Places
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: API_KEY,

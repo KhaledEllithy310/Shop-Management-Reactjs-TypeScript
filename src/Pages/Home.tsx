@@ -6,17 +6,18 @@ import { useState } from 'react'
 import AppMap from '../components/Ui/AppMap'
 import AddForm from '../components/AddForm/AddForm'
 import AppTable from '../components/Ui/table'
-import { useRecoilState } from 'recoil'
-import { shopState } from '../Atoms/Shops'
 import { Marker } from '@react-google-maps/api'
+import { useGetShopList } from '../hooks/useGetShopList'
 
 export default function Home () {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
-  const [shops] = useRecoilState(shopState)
+  //get all shops from firebase
+  const { shopList } = useGetShopList()
 
-  const renderLocationsOnMap = shops.map(shop => {
-    return <Marker position={shop.location} />
+  
+  const renderLocationsOnMap = shopList.map(shop => {
+    return <Marker key={shop.id} position={shop.location} />
   })
   return (
     <>
