@@ -6,11 +6,18 @@ import { useState } from 'react'
 import AppMap from '../components/Ui/AppMap'
 import AddForm from '../components/AddForm/AddForm'
 import AppTable from '../components/Ui/table'
+import { useRecoilState } from 'recoil'
+import { shopState } from '../Atoms/Shops'
+import { Marker } from '@react-google-maps/api'
 
 export default function Home () {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
+  const [shops] = useRecoilState(shopState)
 
+  const renderLocationsOnMap = shops.map(shop => {
+    return <Marker position={shop.location} />
+  })
   return (
     <>
       <Box
@@ -34,7 +41,7 @@ export default function Home () {
       </Box>
 
       <Box component={'section'} sx={{ height: 400 }}>
-        <AppMap />
+        <AppMap>{renderLocationsOnMap}</AppMap>
       </Box>
       <AppModal handleOpen={handleOpen} setOpen={setOpen} open={open}>
         <AddForm handleClose={() => setOpen(false)} />

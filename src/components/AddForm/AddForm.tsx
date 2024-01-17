@@ -44,21 +44,26 @@ const AddForm = ({ handleClose }: IProps) => {
   })
 
   const onSubmit: SubmitHandler<IFormFields> = shop => {
-    //handle edit shop
-    if (currentShop && location.address) {
-      setShops(
-        shops.map(item =>
-          item.shopName === currentShop.shopName ? { ...shop, location } : item
+    //check if user has selected location
+    if (location.address) {
+      //handle edit shop
+      if (Object.keys(currentShop).length > 0) {
+        setShops(
+          shops.map(item =>
+            item.shopName === currentShop.shopName
+              ? { ...shop, location }
+              : item
+          )
         )
-      )
-      notify('success', 'shop updated successfully')
-      setCurrentShop({} as IShop)
-      handleClose()
-      //handle add shop
-    } else if (location.address) {
-      setShops([...shops, { ...shop, location }])
-      handleClose()
-      notify('success', 'shop added successfully')
+        notify('success', 'shop updated successfully')
+        setCurrentShop({} as IShop)
+        handleClose()
+      } else {
+        //handle add shop
+        setShops([...shops, { ...shop, location }])
+        handleClose()
+        notify('success', 'shop added successfully')
+      }
     } else notify('error', 'please select your location')
     setLocation({ lat: 0, lng: 0, address: '' })
   }

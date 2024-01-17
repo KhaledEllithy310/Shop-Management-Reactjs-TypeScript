@@ -2,8 +2,11 @@ import { API_KEY } from '../../constants'
 import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api'
 import { useRecoilState } from 'recoil'
 import { locationState } from '../../Atoms/Location'
-
-const AppMap = () => {
+import { ReactNode } from 'react'
+interface IProps {
+  children?: ReactNode
+}
+const AppMap = ({ children }: IProps) => {
   //----------STATES----------//
   const [location] = useRecoilState(locationState)
 
@@ -23,11 +26,13 @@ const AppMap = () => {
     <>
       <section className='map-container'>
         <GoogleMap
-          zoom={5}
+          zoom={2}
           center={position}
           mapContainerClassName='map-container'
         >
-          {location.address && <Marker position={location} />}
+          {children
+            ? children
+            : location.address && <Marker position={location} />}
         </GoogleMap>
       </section>
     </>
