@@ -1,47 +1,48 @@
-import { Add } from '@mui/icons-material'
-import { Box } from '@mui/material'
-import Button from '@mui/material/Button'
-import AppModal from '../components/Modal/Modal'
-import { useState } from 'react'
-import AppMap from '../components/Ui/AppMap'
-import AddForm from '../components/AddForm/AddForm'
-import AppTable from '../components/Ui/table'
-import { Marker } from '@react-google-maps/api'
-import { useGetShopList } from '../hooks/useGetShopList'
+import { Add } from "@mui/icons-material";
+import { Box } from "@mui/material";
+import Button from "@mui/material/Button";
+import AppModal from "../components/Modal/Modal";
+import { useState } from "react";
+// import AppMap from '../components/Ui/AppMap'
+import AppMap from "../components/Ui/AppMap";
+import AddForm from "../components/AddForm/AddForm";
+import AppTable from "../components/Ui/table";
+import { Marker } from "@react-google-maps/api";
+import { useGetShopList } from "../hooks/useGetShopList";
 
-export default function Home () {
-  const [open, setOpen] = useState(false)
-  const handleOpen = () => setOpen(true)
+export default function Home() {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
   //get all shops from firebase
-  const { shopList } = useGetShopList()
+  const { shopList } = useGetShopList();
 
-  
-  const renderLocationsOnMap = shopList.map(shop => {
-    return <Marker key={shop.id} position={shop.location} />
-  })
+  const renderLocationsOnMap = shopList.map((shop) => {
+    return <Marker key={shop.id} position={shop.location} />;
+  });
   return (
     <>
       <Box
-        component={'section'}
+        component={"section"}
         sx={{
-          display: 'flex',
-          justifyContent: 'start',
-          alignItems: 'center',
-          gap: 1
+          display: "flex",
+          justifyContent: "start",
+          alignItems: "center",
+          gap: 1,
         }}
       >
         <h1>shop management</h1>
         <Button
-          variant='outlined'
+          variant="outlined"
           startIcon={<Add />}
-          sx={{ textTransform: 'capitalize' }}
+          sx={{ textTransform: "capitalize" }}
           onClick={handleOpen}
         >
           Add Shop
         </Button>
       </Box>
 
-      <Box component={'section'} sx={{ height: 400 }}>
+      <Box component={"section"} sx={{ height: 400 }}>
+        {/* <AppMap>{renderLocationsOnMap}</AppMap> */}
         <AppMap>{renderLocationsOnMap}</AppMap>
       </Box>
       <AppModal handleOpen={handleOpen} setOpen={setOpen} open={open}>
@@ -50,5 +51,5 @@ export default function Home () {
 
       <AppTable openModal={handleOpen} />
     </>
-  )
+  );
 }
