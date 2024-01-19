@@ -6,6 +6,8 @@ body {
 .map-container {
   height: 100%;
   width: 100%;
+  border-radius: 10px;
+  margin-bottom: 20px !important;
 }
 
 .form__inputs {
@@ -15,9 +17,9 @@ body {
 
 .PlacesAutocomplete {
   position: absolute;
-  top: 0%;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 10px;
+  left: 10px;
+  /* transform: translateX(-50%); */
 }
 
 .combobox-input {
@@ -39,4 +41,31 @@ body {
 [data-reach-combobox-option]:not(:last-child) {
   padding: 10px;
   border-bottom: 1px solid gray;
+}
+
+.error {
+  color: red;
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+.loading img {
+  width: 300px;
+}
+
+.css-1yhpg23-MuiTableCell-root {
+  padding: 8px !important;
 }

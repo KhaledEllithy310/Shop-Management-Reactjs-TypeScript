@@ -1,22 +1,30 @@
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
-import Paper from '@mui/material/Paper'
-import ActionMenu from './Menu'
-import { useRecoilState } from 'recoil'
-import { shopState } from '../../Atoms/Shops'
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import ActionMenu from "./Menu";
+import { useRecoilState } from "recoil";
+import { shopState } from "../../Atoms/Shops";
 
-const headTitle = ['Shop Name', 'Shop Code', 'location', 'Phone Number', '']
+const headTitle = ["Shop Name", "Shop Code", "location", "Phone Number", ""];
 interface IProps {
-  openModal: () => void
+  openModal: () => void;
 }
-export default function AppTable ({ openModal }: IProps) {
+export default function AppTable({ openModal }: IProps) {
   const [shopList] = useRecoilState(shopState);
   return (
-    <TableContainer component={Paper}>
+    <TableContainer
+      component={Paper}
+      sx={{
+        mt: 4,
+        mb: 5,
+        boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.4)",
+        borderRadius: "10px",
+      }}
+    >
       <Table
         sx={{ minWidth: 650, border: "1px solid #f5f5f5" }}
         aria-label="simple table"

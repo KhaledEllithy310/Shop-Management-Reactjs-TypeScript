@@ -50,7 +50,7 @@ export default function AppModal({ setOpen, open, children }: IProps) {
           <Box component={"section"} sx={{ position: "relative" }}>
             {/* start Map */}
             <Box component={"section"} sx={{ height: 300 }}>
-              <AppMap />
+              <AppMap  />
             </Box>
             {/* end Map */}
             {/* start inputs */}

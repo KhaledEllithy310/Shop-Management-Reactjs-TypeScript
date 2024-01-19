@@ -9,6 +9,7 @@ import {
   useRef,
   useState,
 } from "react";
+import Loading from "./Loading";
 interface IProps {
   children?: ReactNode;
 }
@@ -20,7 +21,7 @@ const AppMap = ({ children }: IProps) => {
   const mapRef = useRef<GoogleMap>();
   const [location, setLocation] = useRecoilState(locationState);
   const position = useMemo<google.maps.LatLngLiteral>(
-    () => ({ lat: 22.54992, lng: 0 }),
+    () => ({ lat: 0, lng: 0 }),
     []
   );
 
@@ -69,7 +70,7 @@ const AppMap = ({ children }: IProps) => {
   });
 
   if (loadError) return <div>Error loading maps</div>;
-  if (!isLoaded) return <div>...Loading</div>;
+  if (!isLoaded) return <Loading />;
 
   const handleMapClick = (e: google.maps.MapMouseEvent) => {
     if (e.latLng === null) return;

@@ -31,10 +31,13 @@ const AddForm = ({ handleClose }: IProps) => {
 
   const contactSchema = z.object({
     shopName: z.string().min(3, "shop name is required at least 3 characters"),
-    shopCode: z.string().min(3, "shop code is required"),
+    shopCode: z.string().min(2, "shop code is required at least 2 characters"),
     phoneNumber: z
       .string()
-      .regex(/^(0)(10|11|15)\d{8}$/, "Invalid phone number format"),
+      .regex(
+        /^(0)(10|11|15)\d{8}$/,
+        "Invalid phone number format (010/011/015) only"
+      ),
   });
 
   const {

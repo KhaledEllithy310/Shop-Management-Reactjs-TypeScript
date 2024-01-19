@@ -1,5 +1,5 @@
 import { Add } from "@mui/icons-material";
-import { Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import Button from "@mui/material/Button";
 import AppModal from "../components/Modal/Modal";
 import { useEffect, useState } from "react";
@@ -35,35 +35,37 @@ export default function Home() {
   });
   return (
     <>
-      <Box
-        component={"section"}
-        sx={{
-          display: "flex",
-          justifyContent: "start",
-          alignItems: "center",
-          gap: 1,
-        }}
-      >
-        <h1>shop management</h1>
-        <Button
-          variant="outlined"
-          startIcon={<Add />}
-          sx={{ textTransform: "capitalize" }}
-          onClick={handleOpen}
+      <Container maxWidth="lg">
+        <Box
+          component={"section"}
+          sx={{
+            display: "flex",
+            justifyContent: "start",
+            alignItems: "center",
+            gap: 1,
+          }}
         >
-          Add Shop
-        </Button>
-      </Box>
+          <h1>Shop Management</h1>
+          <Button
+            variant="outlined"
+            startIcon={<Add />}
+            sx={{ textTransform: "capitalize" }}
+            onClick={handleOpen}
+          >
+            Add Shop
+          </Button>
+        </Box>
 
-      <Box component={"section"} sx={{ height: 400 }}>
-        {/* <AppMap>{renderLocationsOnMap}</AppMap> */}
-        <AppMap>{renderLocationsOnMap}</AppMap>
-      </Box>
-      <AppModal handleOpen={handleOpen} setOpen={setOpen} open={open}>
-        <AddForm handleClose={() => setOpen(false)} />
-      </AppModal>
+        <Box component={"section"} sx={{ height: 400 }}>
+          {/* <AppMap>{renderLocationsOnMap}</AppMap> */}
+          <AppMap>{renderLocationsOnMap}</AppMap>
+        </Box>
+        <AppModal handleOpen={handleOpen} setOpen={setOpen} open={open}>
+          <AddForm handleClose={() => setOpen(false)} />
+        </AppModal>
 
-      <AppTable openModal={handleOpen} />
+        <AppTable openModal={handleOpen} />
+      </Container>
     </>
   );
 }
