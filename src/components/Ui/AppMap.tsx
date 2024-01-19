@@ -13,6 +13,9 @@ import {
 interface IProps {
   children?: ReactNode;
 }
+type Library = "places";
+
+const libraries: Library[] = ["places"];
 const AppMap = ({ children }: IProps) => {
   //----------STATES----------//
   const mapRef = useRef<GoogleMap>();
@@ -35,7 +38,6 @@ const AppMap = ({ children }: IProps) => {
           if (status === "OK") {
             if (results) {
               if (results[0]) {
-                console.log(`Address: ${results[0].formatted_address}`);
                 setLocation({
                   lat: coordinates.lat,
                   lng: coordinates.lng,
@@ -64,18 +66,16 @@ const AppMap = ({ children }: IProps) => {
   // Places
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: API_KEY,
-    libraries: ["places"],
+    libraries,
   });
 
   if (loadError) return <div>Error loading maps</div>;
   if (!isLoaded) return <div>...Loading</div>;
 
   const handleMapClick = (e: google.maps.MapMouseEvent) => {
-    console.log("map click", e);
     if (e.latLng === null) return;
     const lat = e.latLng.lat();
     const lng = e.latLng.lng();
-    console.log(`User clicked at (${lat}, ${lng})`);
     setCoordinates({ lat, lng });
   };
   return (

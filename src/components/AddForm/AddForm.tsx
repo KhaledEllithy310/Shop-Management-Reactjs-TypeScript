@@ -20,11 +20,9 @@ interface IProps {
 }
 const AddForm = ({ handleClose }: IProps) => {
   //----------STATES----------//
-  // const [shops, setShops] = useRecoilState(shopState)
   //current shop for editing
   const [currentShop, setCurrentShop] = useRecoilState(currentShopState);
   const [location, setLocation] = useRecoilState(locationState);
-  console.log("location", location);
 
   //----------HANDLERS----------//
 
@@ -50,22 +48,18 @@ const AddForm = ({ handleClose }: IProps) => {
   });
 
   const onSubmit: SubmitHandler<IFormFields> = (shop) => {
-    console.log("out");
     //check if user has selected location
     if (location.address) {
       //handle edit shop
       if (Object.keys(currentShop).length > 0) {
-        console.log("in edit");
         editShop({ ...shop, location, id: currentShop.id });
         notify("success", "shop updated successfully");
         setCurrentShop({} as IShop);
         handleClose();
       } else {
         //handle add shop
-        console.log("in add");
         //send request to firebase and update recoil
         addShop({ ...shop, location });
-        // setShops([...shops, { ...shop, location }])
         handleClose();
         notify("success", "shop added successfully");
       }
@@ -77,7 +71,7 @@ const AddForm = ({ handleClose }: IProps) => {
     if (currentShop) {
       reset(currentShop);
     }
-  }, [currentShop, reset]);
+  }, [currentShop]);
 
   const handleCloseForm = () => {
     handleClose();

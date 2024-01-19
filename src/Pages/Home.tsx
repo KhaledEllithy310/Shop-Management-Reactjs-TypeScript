@@ -2,20 +2,34 @@ import { Add } from "@mui/icons-material";
 import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
 import AppModal from "../components/Modal/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import AppMap from '../components/Ui/AppMap'
 import AppMap from "../components/Ui/AppMap";
 import AddForm from "../components/AddForm/AddForm";
 import AppTable from "../components/Ui/table";
 import { Marker } from "@react-google-maps/api";
 import { useGetShopList } from "../hooks/useGetShopList";
+import { useRecoilState } from "recoil";
+import { locationState } from "../Atoms/Location";
+import { currentShopState } from "../Atoms/CurrentShop";
+import { IShop } from "../interfaces";
 
 export default function Home() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
+  const [, setCurrentShop] = useRecoilState(currentShopState);
+  const [, setLocation] = useRecoilState(locationState);
   //get all shops from firebase
   const { shopList } = useGetShopList();
 
+  useEffect(() => {
+    if (!open) {
+      setCurrentShop({} as IShop);
+      setLocation({ lat: 0, lng: 0, address: "" });
+    }
+  }, [open]);
+
+  //render locations on map
   const renderLocationsOnMap = shopList.map((shop) => {
     return <Marker key={shop.id} position={shop.location} />;
   });

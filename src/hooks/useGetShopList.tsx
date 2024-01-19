@@ -13,7 +13,6 @@ export const useGetShopList = () => {
   useEffect(() => {
     const fetchShopList = async () => {
       try {
-        console.log("fetching shop list");
         
         const querySnapshot = await getDocs(collection(db, "shops"));
         //get all shops from firebase

@@ -28,17 +28,22 @@ const PlacesAutocomplete = ({ currentShop }: IProps) => {
   } = usePlacesAutocomplete();
 
   const [location, setLocation] = useRecoilState(locationState);
+  
+  //trigger when user change location from input field
   useEffect(() => {
     if (currentShop?.location?.address) {
       handleSelect(currentShop.location.address);
+      clearSuggestions();
     }
+  }, [currentShop]);
+
+  //trigger when user choose location from map
+  useEffect(() => {
     if (location.address) {
       setValue(location.address);
       clearSuggestions();
     }
   }, [location]);
-
-  console.log(data, status, ready);
 
   const handleSelect = async (address: string) => {
     setValue(address, false);
