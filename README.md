@@ -51,10 +51,15 @@ Soft Skills:
 - Attention to Detail: Ensuring accuracy and consistency in features.
 - User Experience (UX) Design: Creating intuitive and user-friendly interfaces.
 
-## 🧪 Project performance test
+## How to run the app locally?
 
-Test the performance of the webpage after deploy by using GTmetrix.
-![performance]
+To run the app locally,
+
+- First fork and clone the repository.
+- Then change to the directory where the repository is cloned.
+- Run `npm install` to install the dependencies.
+- Run `npm run dev` to run the application.
+  
 ## 👋 Get In Touch
 
 - 🌐 Website 👉 <https://khaledellithy-portfolio.vercel.app/>

@@ -16,9 +16,4 @@ export const formFields: IFormInputs[] = [
     label: "phone number",
     type: "number",
   },
-  // {
-  //   name: "location",
-  //   label: "location",
-  //   type: "text",
-  // },
 ];
