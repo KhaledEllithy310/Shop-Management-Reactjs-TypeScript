@@ -1,30 +1,67 @@
-# React + TypeScript + Vite
+# Shop Management — React App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 👁️ Project Preview
 
-Currently, two official plugins are available:
+Live Preview 👉 <https://shop-management-nu.vercel.app//>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📝 Project Description & features
 
-## Expanding the ESLint configuration
+This project involves developing a single-page React.js application that manages a list of shops. The application integrates with Firebase Firestore for data storage and use Material-UI (MUI) components for the user interface. Additionally, this project utilizes Recoil, a state management library to handle state logic in the application.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Firestore Powered: Stores shop data efficiently in real-time using Firebase Firestore.
+- Visual Shop Management: Displays a grid of shops with add, edit, and delete functionalities.
+- Interactive Map: Features a map showing shop locations, updating dynamically with changes.
+- User-Friendly Shop Creation/Editing: Offers an intuitive modal with autocomplete and map integration for easy data entry.
+- Seamless Location Setting: Allows setting shop locations either by clicking on the map or typing in the autocomplete field, ensuring accuracy and consistency.
+- Recoil for Clean Code: Manages complex state logic efficiently using Recoil, promoting code maintainability.
 
-- Configure the top-level `parserOptions` property like this:
+## 🛠️ Project Tools
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- TypeScript
+- React.js
+- Material-UI
+- React Router Dom
+- React Hooks
+- Recoil (state management library)
+- Google Api
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## ✨ Project Skills applied
+
+Front-End:
+
+- React (TypeScript): Core framework for building the UI, utilizing TypeScript's type safety and tooling.
+- HTML/CSS: Markup and styling for the application's structure and visual presentation.
+- TypeScript: Superset of JavaScript providing type checking and improved code maintainability.
+- Google Maps API: Used to integrate and manage the map component.
+- Recoil: State management library for organizing and sharing application state.
+  
+Back-End:
+
+- Firebase Firestore.
+  
+Additional Skills:
+
+- Geocoding: Converting addresses to coordinates for map placement.
+- Autocomplete: Implementing suggestions for location input.
+
+Soft Skills:
+
+- Problem-Solving: Ability to identify and address technical challenges.
+- Organization: Structuring code and project files for maintainability.
+- Attention to Detail: Ensuring accuracy and consistency in features.
+- User Experience (UX) Design: Creating intuitive and user-friendly interfaces.
+
+## 🧪 Project performance test
+
+Test the performance of the webpage after deploy by using GTmetrix.
+![performance]
+## 👋 Get In Touch
+
+- 🌐 Website 👉 <https://khaledellithy-portfolio.vercel.app/>
+- 👔 LinkedIn 👉 <https://www.linkedin.com/in/khaledashrafellithy/>
+- 🌟 Github 👉 <https://github.com/KhaledEllithy310>
+- 📧 Email 👉 <khaledellessy310@gmail.com>
+- ☎️ Whatsapp 👉 (+20) 112-461-2043
+
+2024 © Khaled Ellithy
+****
