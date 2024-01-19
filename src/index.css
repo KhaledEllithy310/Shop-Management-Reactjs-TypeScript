@@ -51,7 +51,7 @@ body {
   margin-bottom: 0;
 }
 
-.loading {
+/* .loading {
   position: absolute;
   top: 0;
   left: 0;
@@ -64,7 +64,7 @@ body {
 }
 .loading img {
   width: 300px;
-}
+} */
 
 .css-1yhpg23-MuiTableCell-root {
   padding: 8px !important;

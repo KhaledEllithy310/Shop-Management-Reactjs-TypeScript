@@ -70,7 +70,7 @@ const AppMap = ({ children }: IProps) => {
   });
 
   if (loadError) return <div>Error loading maps</div>;
-  if (!isLoaded) return <Loading />;
+  if (!isLoaded) return <div>...Loading</div>;
 
   const handleMapClick = (e: google.maps.MapMouseEvent) => {
     if (e.latLng === null) return;
