@@ -25,18 +25,8 @@ interface IProps {
 }
 export default function AppModal({ setOpen, open, children }: IProps) {
   const handleClose = () => setOpen(false);
-  // const mapRef = useRef<GoogleMap>(null);
-  // const [location] = useRecoilState(locationState);
-
-  // useEffect(() => {
-  //   if (location.lat && location.lng && mapRef.current) {
-  //     mapRef.current.panTo({ lat: location.lat, lng: location.lng });
-  //   }
-  // }, [location]);
-
   return (
     <div>
-      {/* <Button onClick={handleOpen}>Open modal</Button> */}
       <Modal
         open={open}
         onClose={handleClose}
@@ -50,7 +40,7 @@ export default function AppModal({ setOpen, open, children }: IProps) {
           <Box component={"section"} sx={{ position: "relative" }}>
             {/* start Map */}
             <Box component={"section"} sx={{ height: 300 }}>
-              <AppMap  />
+              <AppMap open={open} />
             </Box>
             {/* end Map */}
             {/* start inputs */}

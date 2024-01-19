@@ -11,11 +11,12 @@ import {
 } from "react";
 interface IProps {
   children?: ReactNode;
+  open: boolean;
 }
 type Library = "places";
 
 const libraries: Library[] = ["places"];
-const AppMap = ({ children }: IProps) => {
+const AppMap = ({ children, open }: IProps) => {
   //----------STATES----------//
   const mapRef = useRef<GoogleMap>();
   const [location, setLocation] = useRecoilState(locationState);
@@ -73,6 +74,7 @@ const AppMap = ({ children }: IProps) => {
 
   const handleMapClick = (e: google.maps.MapMouseEvent) => {
     if (e.latLng === null) return;
+    if (!open) return;
     const lat = e.latLng.lat();
     const lng = e.latLng.lng();
     setCoordinates({ lat, lng });

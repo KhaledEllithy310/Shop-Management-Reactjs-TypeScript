@@ -1,4 +1,4 @@
-import { MoreVert } from "@mui/icons-material";
+import { Edit, MoreVert, Remove } from "@mui/icons-material";
 import { Button, Menu, MenuItem } from "@mui/material";
 import React from "react";
 import { IShop } from "../../interfaces";
@@ -55,8 +55,12 @@ export default function ActionMenu({ shop, openModal }: IProps) {
           "aria-labelledby": "menu-button",
         }}
       >
-        <MenuItem onClick={handleEditShop}>Edit</MenuItem>
-        <MenuItem onClick={handleDeleteShop}>Remove</MenuItem>
+        <MenuItem onClick={handleEditShop} sx={{ display: "flex", gap: 1 }}>
+          <Edit /> Edit
+        </MenuItem>
+        <MenuItem onClick={handleDeleteShop} sx={{ display: "flex", gap: 1 }}>
+          <Remove /> Remove
+        </MenuItem>
       </Menu>
     </div>
   );

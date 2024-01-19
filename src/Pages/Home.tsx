@@ -58,7 +58,7 @@ export default function Home() {
 
         <Box component={"section"} sx={{ height: 400 }}>
           {/* <AppMap>{renderLocationsOnMap}</AppMap> */}
-          <AppMap>{renderLocationsOnMap}</AppMap>
+          <AppMap open={false}>{renderLocationsOnMap}</AppMap>
         </Box>
         <AppModal handleOpen={handleOpen} setOpen={setOpen} open={open}>
           <AddForm handleClose={() => setOpen(false)} />
