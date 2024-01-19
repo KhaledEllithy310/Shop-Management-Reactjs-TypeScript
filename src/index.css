@@ -19,7 +19,6 @@ body {
   position: absolute;
   top: 10px;
   left: 10px;
-  /* transform: translateX(-50%); */
 }
 
 .combobox-input {
@@ -50,21 +49,6 @@ body {
   margin-top: 5px;
   margin-bottom: 0;
 }
-
-/* .loading {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-}
-.loading img {
-  width: 300px;
-} */
 
 .css-1yhpg23-MuiTableCell-root {
   padding: 8px !important;
