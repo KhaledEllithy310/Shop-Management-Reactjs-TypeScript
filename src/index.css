@@ -1,13 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,400&display=swap');
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
 .map-container {
   height: 100%;
   width: 100%;
 }
-
-/* .form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-} */
 
 .form__inputs {
   display: flex;
