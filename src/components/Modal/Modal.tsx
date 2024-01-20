@@ -9,7 +9,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 560,
+  // width: 560,
   bgcolor: "background.paper",
   border: "2px solid transparent",
   borderRadius: "10px",
@@ -33,13 +33,13 @@ export default function AppModal({ setOpen, open, children }: IProps) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={style} className="modal-container">
           <Typography id="modal-modal-title" variant="h6" component="h6">
             Shop Location
           </Typography>
           <Box component={"section"} sx={{ position: "relative" }}>
             {/* start Map */}
-            <Box component={"section"} sx={{ height: 300 }}>
+            <Box component={"section"} className="map-box">
               <AppMap open={open} />
             </Box>
             {/* end Map */}

@@ -21,7 +21,7 @@ const AppMap = ({ children, open }: IProps) => {
   const mapRef = useRef<GoogleMap>();
   const [location, setLocation] = useRecoilState(locationState);
   const position = useMemo<google.maps.LatLngLiteral>(
-    () => ({ lat: 0, lng: 0 }),
+    () => ({ lat: 22, lng: 0 }),
     []
   );
 

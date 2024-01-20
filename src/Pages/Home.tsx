@@ -35,15 +35,16 @@ export default function Home() {
   });
   return (
     <>
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{ py: 2 }}>
         <Box
           component={"section"}
-          sx={{
-            display: "flex",
-            justifyContent: "start",
-            alignItems: "center",
-            gap: 1,
-          }}
+          className="title-box"
+          // sx={{
+          //   display: "flex",
+          //   justifyContent: "start",
+          //   alignItems: "center",
+          //   gap: 1,
+          // }}
         >
           <h1>Shop Management</h1>
           <Button
