@@ -29,11 +29,14 @@ This project involves developing a single-page React.js application that manages
 
 Front-End:
 
-- React (TypeScript): Core framework for building the UI, utilizing TypeScript's type safety and tooling.
+- React (TypeScript): A core framework for building the UI, utilizing TypeScript's type safety and tooling.
 - HTML/CSS: Markup and styling for the application's structure and visual presentation.
 - TypeScript: Superset of JavaScript providing type checking and improved code maintainability.
 - Google Maps API: Used to integrate and manage the map component.
 - Recoil: State management library for organizing and sharing application state.
+- React Hook Form: Form library for handling form state, validation, and submission.
+- Zod: Schema validation library for enforcing data types and constraints.
+
   
 Back-End:
 
