@@ -45,8 +45,6 @@ body {
   margin-bottom: 20px;
 }
 
-.title-box h1 {
-}
 @media screen and (max-width: 375px) {
   .title-box {
     flex-flow: column wrap;
@@ -62,11 +60,18 @@ body {
 }
 
 .combobox-input {
-  height: 1rem;
+  height: 2rem;
   width: 11rem;
   border-radius: 5px;
   outline: none;
   padding: 5px;
+}
+
+@media screen and (max-width: 375px) {
+  .combobox-input {
+    height: 1.5rem;
+    width: 7rem;
+  }
 }
 
 .combobox-input:focus {
